@@ -24,7 +24,8 @@ namespace Dta.Marketplace.Subscribers.Slack.Worker.Processors {
                     };
                     var message = JsonConvert.DeserializeAnonymousType(awsSnsMessage.Message, definition);
                     var slackMessage =
-$@":imp:*ABR API failed*:imp:";
+$@":imp:*ABR API failed*:imp:
+Error: {message.abr.error}";
 
                     return await _slackService.SendSlackMessage(_config.Value.AbrSlackUrl, slackMessage);
 
