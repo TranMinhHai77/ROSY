@@ -19,13 +19,13 @@ namespace Dta.Marketplace.Subscribers.Slack.Worker.Processors {
                 case "abr_failed":
                     var definition = new {
                         abr = new {
-                            error = ""
-                        }
+                        },
+                        error = ""
                     };
                     var message = JsonConvert.DeserializeAnonymousType(awsSnsMessage.Message, definition);
                     var slackMessage =
 $@":imp:*ABR API failed*:imp:
-Error: {message.abr.error}";
+Error: {message.error}";
 
                     return await _slackService.SendSlackMessage(_config.Value.AbrSlackUrl, slackMessage);
 
